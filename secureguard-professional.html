@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecure - Современное решение для кибербезопасности</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --dark: #0f172a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--light) 0%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            background: transparent;
+            border: none;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Герой-секция */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Секции */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Карточки */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+            min-height: 300px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon i {
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .card-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            color: var(--primary-dark);
+            gap: 0.75rem;
+        }
+
+        /* Статистика */
+        .stats-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+            color: var(--white);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Инструменты безопасности */
+        .tools-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .tools-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            border: 1px solid var(--light-gray);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+        }
+
+        .tool-icon i {
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .strength-meter {
+            margin: 1.5rem 0;
+        }
+
+        .strength-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-level {
+            height: 100%;
+            width: 0%;
+            background: var(--danger);
+            transition: width 0.5s ease, background 0.5s ease;
+        }
+
+        .strength-text {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .requirements {
+            margin-top: 1.5rem;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .requirement i {
+            margin-right: 0.5rem;
+        }
+
+        .requirement.met i {
+            color: var(--success);
+        }
+
+        .requirement.pending i {
+            color: var(--gray);
+        }
+
+        /* Генератор паролей */
+        .generator-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .control-group input {
+            margin-right: 0.5rem;
+        }
+
+        .length-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .length-slider {
+            flex: 1;
+        }
+
+        .length-value {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 3rem;
+        }
+
+        .generated-password {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Подвал */
+        footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .card {
+                padding: 2rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                transform: translateX(-100%);
+                transition: transform 0.4s ease;
+                z-index: 999;
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                transform: translateX(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                padding: 10px 20px;
+                display: block;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 150px 20px 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+            
+            .generator-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .card p {
+                font-size: 0.95rem;
+            }
+            
+            .tool-title {
+                font-size: 1.3rem;
+            }
+            
+            .password-input {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .generated-password {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .length-control {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 320px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 100%;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* Для планшетов в горизонтальной ориентации */
+        @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Для больших планшетов */
+        @media (min-width: 1025px) and (max-width: 1200px) {
+            .container {
+                width: 95%;
+            }
+            
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Исправления для прокрутки на мобильных устройствах */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+            
+            .card {
+                overflow-x: hidden;
+            }
+        }
+
+        /* Специальные эффекты */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="container header-container">
+            <a href="#home" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CyberSecure
+            </a>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#tools">Инструменты</a></li>
+                    <li><a href="#security">Безопасность</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1 class="fade-in">Современное решение для кибербезопасности</h1>
+            <p class="fade-in delay-1">Защитите свои данные с помощью передовых технологий безопасности и инструментов анализа паролей</p>
+            <div class="cta-buttons fade-in delay-2">
+                <a href="#tools" class="btn btn-primary">
+                    <i class="fas fa-lock"></i>
+                    Проверить пароль
+                </a>
+                <a href="#security" class="btn btn-secondary">
+                    <i class="fas fa-shield-alt"></i>
+                    Узнать больше
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" id="attacks-counter">0</div>
+                    <div class="stat-label">атак в минуту</div>
+                </div>
+                <div class="stat-item fade-in delay-1">
+                    <div class="stat-number">4.8B</div>
+                    <div class="stat-label">скомпрометированных аккаунтов</div>
+                </div>
+                <div class="stat-item fade-in delay-2">
+                    <div class="stat-number">32%</div>
+                    <div class="stat-label">увеличение угроз за год</div>
+                </div>
+                <div class="stat-item fade-in delay-3">
+                    <div class="stat-number">237</div>
+                    <div class="stat-label">дней на устранение утечки</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="security">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in">Основы кибербезопасности</h2>
+                <p class="section-subtitle fade-in delay-1">Изучите ключевые принципы защиты в цифровом мире</p>
+            </div>
+            <div class="cards-container">
+                <div class="card fade-in delay-2">
+                    <div class="card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Надежные пароли</h3>
+                    <p>Используйте сложные пароли, состоящие из букв, цифр и специальных символов. Не используйте одни и те же пароли для разных аккаунтов.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-3">
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Двухфакторная аутентификация</h3>
+                    <p>Всегда включайте двухфакторную аутентификацию. Это добавляет дополнительный уровень защиты к вашим аккаунтам.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-4">
+                    <div class="card-icon">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <h3>Фишинг</h3>
+                    <p>Будьте осторожны с подозрительными электронными письмами и ссылками. Не переходите по ссылкам в письмах от неизвестных отправителей.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-2">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Обновления программного обеспечения</h3>
+                    <p>Регулярно обновляйте операционную систему, браузеры и приложения. Уязвимости в устаревшем ПО часто используются злоумышленниками.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-3">
+                    <div class="card-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Шифрование данных</h3>
+                    <p>Используйте шифрование для защиты конфиденциальных данных. Это особенно важно для ноутбуков, телефонов и внешних накопителей.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-4">
+                    <div class="card-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Облачные резервные копии</h3>
+                    <p>Регулярно создавайте резервные копии важных данных в облаке и на физических носителях. Это защитит вас от ransomware и аппаратных сбоев.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-2">
+                    <div class="card-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Безопасность Wi-Fi</h3>
+                    <p>Используйте защищенные Wi-Fi сети с сильным паролем. Избегайте открытых публичных сетей, особенно для банковских операций и входа в важные аккаунты.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-3">
+                    <div class="card-icon">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <h3>Антивирусное программное обеспечение</h3>
+                    <p>Установите и регулярно обновляйте надежное антивирусное программное обеспечение. Оно помогает обнаруживать и предотвращать вредоносное ПО.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card fade-in delay-4">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Обучение и осведомленность</h3>
+                    <p>Регулярно обучайтесь последним угрозам и методам кибератак. Человеческий фактор остается одним из главных путей проникновения злоумышленников.</p>
+                    <a href="#" class="card-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in">Инструменты безопасности</h2>
+                <p class="section-subtitle fade-in delay-1">Проверьте и создайте надежные пароли</p>
+            </div>
+            <div class="tools-container">
+                <div class="tool-card fade-in delay-2">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="tool-title">Проверка надежности пароля</h3>
+                    </div>
+                    <div class="password-input-group">
+                        <input type="password" id="password" class="password-input" placeholder="Введите пароль для проверки...">
+                        <div class="strength-meter">
+                            <div class="strength-bar">
+                                <div class="strength-level" id="strength-level"></div>
+                            </div>
+                            <div class="strength-text" id="strength-text">Введите пароль для проверки</div>
+                        </div>
+                        <div class="requirements">
+                            <div class="requirement pending" id="req-length">
+                                <i class="fas fa-times"></i>Минимум 8 символов
+                            </div>
+                            <div class="requirement pending" id="req-uppercase">
+                                <i class="fas fa-times"></i>Заглавные буквы (A-Z)
+                            </div>
+                            <div class="requirement pending" id="req-lowercase">
+                                <i class="fas fa-times"></i>Строчные буквы (a-z)
+                            </div>
+                            <div class="requirement pending" id="req-number">
+                                <i class="fas fa-times"></i>Цифры (0-9)
+                            </div>
+                            <div class="requirement pending" id="req-special">
+                                <i class="fas fa-times"></i>Специальные символы (!@#$%^&*)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card fade-in delay-3">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-random"></i>
+                        </div>
+                        <h3 class="tool-title">Генератор надежных паролей</h3>
+                    </div>
+                    <div class="generator-controls">
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="include-uppercase" checked> Заглавные буквы
+                            </label>
+                        </div>
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="include-lowercase" checked> Строчные буквы
+                            </label>
+                        </div>
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="include-numbers" checked> Цифры
+                            </label>
+                        </div>
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="include-symbols" checked> Символы
+                            </label>
+                        </div>
+                    </div>
+                    <div class="length-control">
+                        <span>Длина: </span>
+                        <input type="range" id="password-length" min="8" max="30" value="12" class="length-slider">
+                        <span id="length-value" class="length-value">12</span>
+                    </div>
+                    <div class="generated-password" id="generated-password">
+                        Нажмите "Сгенерировать"
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="generate-btn">
+                            <i class="fas fa-sync-alt"></i>
+                            Сгенерировать
+                        </button>
+                        <button class="btn btn-secondary" id="copy-btn">
+                            <i class="fas fa-copy"></i>
+                            Копировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CyberSecure</h3>
+                    <p>Современное решение для защиты ваших данных в цифровом мире.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Ресурсы</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#tools">Инструменты</a></li>
+                        <li><a href="#security">Безопасность</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li>24/7 мониторинг угроз</li>
+                        <li>Быстрая реакция на инциденты</li>
+                        <li>Консультации специалистов</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 CyberSecure. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                
+                // Анимация гамбургера
+                const bars = menuToggle.querySelectorAll('.bar');
+                if (mainNav.classList.contains('active')) {
+                    bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                    bars[1].style.opacity = '0';
+                    bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                } else {
+                    bars[0].style.transform = 'none';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'none';
+                }
+            });
+            
+            // Закрытие меню при клике на ссылку
+            const navLinks = document.querySelectorAll('#main-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                    const bars = menuToggle.querySelectorAll('.bar');
+                    bars[0].style.transform = 'none';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'none';
+                });
+            });
+
+            // Проверка пароля
+            const passwordInput = document.getElementById('password');
+            const strengthLevel = document.getElementById('strength-level');
+            const strengthText = document.getElementById('strength-text');
+            
+            // Элементы требований
+            const reqLength = document.getElementById('req-length');
+            const reqUppercase = document.getElementById('req-uppercase');
+            const reqLowercase = document.getElementById('req-lowercase');
+            const reqNumber = document.getElementById('req-number');
+            const reqSpecial = document.getElementById('req-special');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                
+                if (password.length === 0) {
+                    strengthLevel.style.width = '0%';
+                    strengthLevel.style.backgroundColor = '#ef4444';
+                    strengthText.textContent = 'Введите пароль для проверки';
+                    
+                    // Сбрасываем требования
+                    reqLength.className = 'requirement pending';
+                    reqUppercase.className = 'requirement pending';
+                    reqLowercase.className = 'requirement pending';
+                    reqNumber.className = 'requirement pending';
+                    reqSpecial.className = 'requirement pending';
+                    
+                    return;
+                }
+                
+                // Проверяем требования
+                const hasLength = password.length >= 8;
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasLowercase = /[a-z]/.test(password);
+                const hasNumber = /[0-9]/.test(password);
+                const hasSpecial = /[^A-Za-z0-9]/.test(password);
+                
+                // Обновляем требования
+                reqLength.className = hasLength ? 'requirement met' : 'requirement pending';
+                reqUppercase.className = hasUppercase ? 'requirement met' : 'requirement pending';
+                reqLowercase.className = hasLowercase ? 'requirement met' : 'requirement pending';
+                reqNumber.className = hasNumber ? 'requirement met' : 'requirement pending';
+                reqSpecial.className = hasSpecial ? 'requirement met' : 'requirement pending';
+                
+                // Продвинутая проверка надежности пароля
+                let strength = 0;
+                
+                // Основные критерии
+                if (hasLength) strength += 20;
+                if (hasUppercase) strength += 20;
+                if (hasLowercase) strength += 20;
+                if (hasNumber) strength += 20;
+                if (hasSpecial) strength += 20;
+                
+                // Убедимся, что оценка в пределах 0-100
+                strength = Math.max(0, Math.min(100, strength));
+                
+                // Устанавливаем уровень надежности
+                strengthLevel.style.width = strength + '%';
+                
+                // Определение цвета и текста в зависимости от силы
+                if (strength < 40) {
+                    strengthLevel.style.backgroundColor = '#ef4444'; // Красный
+                    strengthText.textContent = 'Слабый пароль';
+                    strengthText.style.color = '#ef4444';
+                } else if (strength < 80) {
+                    strengthLevel.style.backgroundColor = '#f59e0b'; // Оранжевый
+                    strengthText.textContent = 'Средний пароль';
+                    strengthText.style.color = '#f59e0b';
+                } else {
+                    strengthLevel.style.backgroundColor = '#10b981'; // Зеленый
+                    strengthText.textContent = 'Надежный пароль';
+                    strengthText.style.color = '#10b981';
+                }
+            });
+
+            // Обновление значения длины пароля
+            const lengthSlider = document.getElementById('password-length');
+            const lengthValue = document.getElementById('length-value');
+            
+            lengthSlider.addEventListener('input', function() {
+                lengthValue.textContent = this.value;
+            });
+
+            // Генератор паролей
+            const generateBtn = document.getElementById('generate-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const generatedPassword = document.getElementById('generated-password');
+            
+            generateBtn.addEventListener('click', generatePassword);
+            
+            function generatePassword() {
+                const length = lengthSlider.value;
+                const includeUppercase = document.getElementById('include-uppercase').checked;
+                const includeLowercase = document.getElementById('include-lowercase').checked;
+                const includeNumbers = document.getElementById('include-numbers').checked;
+                const includeSymbols = document.getElementById('include-symbols').checked;
+                
+                if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSymbols) {
+                    generatedPassword.textContent = 'Выберите хотя бы один тип символов';
+                    return;
+                }
+                
+                const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+                const numberChars = '0123456789';
+                const symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                
+                let charSet = '';
+                if (includeUppercase) charSet += uppercaseChars;
+                if (includeLowercase) charSet += lowercaseChars;
+                if (includeNumbers) charSet += numberChars;
+                if (includeSymbols) charSet += symbolChars;
+                
+                if (charSet === '') {
+                    generatedPassword.textContent = 'Выберите хотя бы один тип символов';
+                    return;
+                }
+                
+                let password = '';
+                
+                // Убедимся, что в пароле есть хотя бы по одному символу каждого типа, если он выбран
+                if (includeUppercase) {
+                    password += uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)];
+                }
+                if (includeLowercase) {
+                    password += lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)];
+                }
+                if (includeNumbers) {
+                    password += numberChars[Math.floor(Math.random() * numberChars.length)];
+                }
+                if (includeSymbols) {
+                    password += symbolChars[Math.floor(Math.random() * symbolChars.length)];
+                }
+                
+                // Заполним оставшиеся позиции случайными символами
+                for (let i = password.length; i < length; i++) {
+                    password += charSet[Math.floor(Math.random() * charSet.length)];
+                }
+                
+                // Перемешаем пароль
+                password = password.split('').sort(() => Math.random() - 0.5).join('');
+                
+                // Обрежем до нужной длины (если нужно)
+                password = password.substring(0, length);
+                
+                generatedPassword.textContent = password;
+            }
+
+            // Копирование пароля
+            copyBtn.addEventListener('click', copyPassword);
+            
+            function copyPassword() {
+                const password = generatedPassword.textContent;
+                if (password === 'Нажмите "Сгенерировать"' || password === 'Выберите хотя бы один тип символов') {
+                    alert('Сначала сгенерируйте пароль!');
+                    return;
+                }
+                
+                navigator.clipboard.writeText(password).then(() => {
+                    alert('Пароль скопирован в буфер обмена!');
+                }).catch(err => {
+                    console.error('Ошибка при копировании: ', err);
+                    // Альтернативный метод копирования
+                    const textArea = document.createElement('textarea');
+                    textArea.value = password;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('Пароль скопирован в буфер обмена!');
+                });
+            }
+
+            // Анимация счетчика
+            function animateCounter(element, finalValue, duration) {
+                let startValue = 0;
+                const increment = finalValue / (duration / 16); // 60fps
+                const timer = setInterval(() => {
+                    startValue += increment;
+                    if (startValue >= finalValue) {
+                        element.textContent = finalValue.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(startValue).toLocaleString();
+                    }
+                }, 16);
+            }
+
+            // Анимация при загрузке страницы
+            setTimeout(() => {
+                animateCounter(document.getElementById('attacks-counter'), 2500, 3000);
+            }, 1000);
+
+            // Анимация карточек при скролле
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.card, .stat-item, .tool-card, .section-title, .section-subtitle').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Функция для плавного скролла к якорям
+            document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Добавляем функциональность кнопок "Подробнее"
+            const detailButtons = document.querySelectorAll('.card-link');
+            
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const card = this.closest('.card');
+                    const content = card.querySelector('p');
+                    
+                    // Переключаем содержимое в зависимости от типа карточки
+                    const cardTitle = card.querySelector('h3').textContent;
+                    let detailedText = '';
+                    let isExpanded = this.innerHTML.includes('Свернуть');
+                    
+                    if (cardTitle.includes('Надежные пароли')) {
+                        if (!isExpanded) {
+                            detailedText = 'Создавайте пароли длиной не менее 12 символов, включающие заглавные и строчные буквы, цифры и специальные символы. Избегайте использования личной информации, такой как имена, даты рождения или адреса. Используйте уникальные пароли для каждого аккаунта. Рекомендуется использовать фразы-пароли (passphrases) из 4-5 случайных слов, которые легко запомнить, но трудно угадать. Не храните пароли в текстовых файлах или записывайте их на бумажных носителях. Регулярно обновляйте пароли для важных аккаунтов, особенно если вы подозреваете утечку данных.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Используйте сложные пароли, состоящие из букв, цифр и специальных символов. Не используйте одни и те же пароли для разных аккаунтов.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Двухфакторная аутентификация')) {
+                        if (!isExpanded) {
+                            detailedText = 'Двухфакторная аутентификация (2FA) добавляет дополнительный уровень безопасности, требуя второй фактор подтверждения личности. Это может быть SMS-код, приложение-аутентификатор или аппаратный ключ. Даже если ваш пароль скомпрометирован, злоумышленнику будет трудно получить доступ к вашему аккаунту. Используйте приложения-аутентификаторы (Google Authenticator, Authy, Microsoft Authenticator) вместо SMS, если это возможно, поскольку SMS подвержены атакам. Для максимальной безопасности используйте аппаратные токены (YubiKey) для критических аккаунтов.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Всегда включайте двухфакторную аутентификацию. Это добавляет дополнительный уровень защиты к вашим аккаунтам.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Фишинг')) {
+                        if (!isExpanded) {
+                            detailedText = 'Фишинговые атаки пытаются обмануть вас, заставляя раскрыть личную информацию. Будьте осторожны с подозрительными электронными письмами, сообщениями и веб-сайтами. Проверяйте адреса веб-сайтов и не переходите по подозрительным ссылкам. Никогда не указывайте логины и пароли в ответ на электронные письма. Обратите внимание на следующие признаки фишинга: срочность или давление, орфографические ошибки, неправильное имя отправителя, подозрительные адреса электронной почты или URL-адреса. Проверяйте URL-адреса перед переходом по ссылке, особенно если они ведут на страницы входа в систему.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Будьте осторожны с подозрительными электронными письмами и ссылками. Не переходите по ссылкам в письмах от неизвестных отправителей.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Обновления программного обеспечения')) {
+                        if (!isExpanded) {
+                            detailedText = 'Уязвимости в устаревшем ПО часто используются злоумышленниками. Регулярно обновляйте операционную систему, браузеры, приложения и драйверы. Включите автоматические обновления, где это возможно. Проверяйте обновления не реже одного раза в неделю. Обновления часто содержат исправления безопасности, которые защищают от новых угроз. Злоумышленники активно используют известные уязвимости в устаревшем программном обеспечении. Для корпоративных пользователей: создайте политику обновлений и регулярно проверяйте, что все системы актуальны.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Регулярно обновляйте операционную систему, браузеры и приложения. Уязвимости в устаревшем ПО часто используются злоумышленниками.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Шифрование данных')) {
+                        if (!isExpanded) {
+                            detailedText = 'Шифрование преобразует данные в нечитаемый формат без специального ключа. Это обеспечивает дополнительный уровень защиты конфиденциальных данных. Используйте встроенные средства шифрования в Windows (BitLocker), macOS (FileVault) или Linux (LUKS). Для мобильных устройств: включите шифрование в настройках безопасности. При работе с особенно чувствительными данными используйте сторонние решения для шифрования файлов. Помните, что шифрование не заменяет резервное копирование - даже зашифрованные данные могут быть потеряны из-за аппаратных сбоев.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Используйте шифрование для защиты конфиденциальных данных. Это особенно важно для ноутбуков, телефонов и внешних накопителей.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Облачные резервные копии')) {
+                        if (!isExpanded) {
+                            detailedText = 'Регулярное создание резервных копий защищает от ransomware, аппаратных сбоев, краж и других потерь данных. Используйте правило 3-2-1: 3 копии данных, на 2 разных типах носителей, 1 копия в облаке. Облачные сервисы обеспечивают защиту от физических угроз (кража, пожар, наводнение). Регулярно тестируйте восстановление данных из резервных копий. Для максимальной безопасности: используйте шифрование при передаче и хранении данных в облаке. Для домашних пользователей: настройте автоматическое резервное копирование важных файлов.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Регулярно создавайте резервные копии важных данных в облаке и на физических носителях. Это защитит вас от ransomware и аппаратных сбоев.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Безопасность Wi-Fi')) {
+                        if (!isExpanded) {
+                            detailedText = 'Используйте WPA3 или WPA2 (в порядке убывания предпочтений) для шифрования Wi-Fi сетей. Избегайте открытых публичных Wi-Fi сетей для чувствительных операций. Если необходимо использовать публичный Wi-Fi, применяйте VPN для дополнительной защиты. Регулярно меняйте пароли от роутеров и используйте сильные пароли. Отключайте автоматическое подключение к открытым сетям. Используйте отдельную гостевую сеть для устройств гостей. Настройте MAC-фильтрацию, если это возможно, для дополнительной безопасности.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Используйте защищенные Wi-Fi сети с сильным паролем. Избегайте открытых публичных сетей, особенно для банковских операций и входа в важные аккаунты.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Антивирусное программное обеспечение')) {
+                        if (!isExpanded) {
+                            detailedText = 'Антивирусное программное обеспечение обнаруживает и удаляет вредоносное ПО, включая вирусы, шпионские программы и трояны. Выбирайте известные и надежные антивирусы с хорошей репутацией. Обновляйте антивирусные базы регулярно - ежедневно или даже в реальном времени. Проводите полное сканирование системы не реже одного раза в месяц. Не отключайте реального времени сканирование. Используйте программное обеспечение для обнаружения шпионских программ (например, Malwarebytes) в дополнение к антивирусу. Будьте осторожны с бесплатными антивирусами - они могут иметь ограниченные функции по сравнению с платными версиями.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Установите и регулярно обновляйте надежное антивирусное программное обеспечение. Оно помогает обнаруживать и предотвращать вредоносное ПО.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    } else if (cardTitle.includes('Обучение и осведомленность')) {
+                        if (!isExpanded) {
+                            detailedText = 'Человеческий фактор остается одной из основных угроз безопасности. Регулярно обучайтесь последним угрозам и методам кибератак. Участвуйте в тренингах по кибербезопасности, проходите онлайн-курсы, читайте специализированные ресурсы. Будьте внимательны при открытии писем, особенно с вложениями или ссылками. Проверяйте подлинность запросов на предоставление информации. Рассказывайте членам семьи и коллегам о киберугрозах. Используйте симуляции фишинга для самопроверки. Поддерживайте актуальные знания о социальной инженерии и других методах манипуляции.';
+                            this.innerHTML = 'Свернуть <i class="fas fa-arrow-up"></i>';
+                        } else {
+                            detailedText = 'Регулярно обучайтесь последним угрозам и методам кибератак. Человеческий фактор остается одним из главных путей проникновения злоумышленников.';
+                            this.innerHTML = 'Подробнее <i class="fas fa-arrow-right"></i>';
+                        }
+                    }
+                    
+                    content.textContent = detailedText;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
